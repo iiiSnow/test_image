@@ -1,12 +1,13 @@
 import gradio as gr
 import torch
-import requests
 from torchvision import transforms
 
 torch.hub._validate_not_a_forked_repo=lambda a,b,c: True
 model = torch.hub.load('pytorch/vision:v0.6.0', 'resnet18', pretrained=True).eval()
-response = requests.get("https://git.io/JJkYN")
-labels = response.text.split("\n")
+
+# 读取本地文件内容
+with open("xx.txt", "r") as file:
+    labels = file.read().split("\n")
 
 def predict(inp):
   inp = transforms.ToTensor()(inp).unsqueeze(0)
